@@ -36,12 +36,12 @@ def get_data(symbols, dates):
 '''
 
 
-def plot_data(df):
+def plot_data(df,title='Stocks', ylabel='Price'):
 
     # PLOT
-    df.plot(title='Stocks', fontsize=12)
+    df.plot(title=title, fontsize=12)
     plt.xlabel('Date')
-    plt.ylabel('Price')
+    plt.ylabel(ylabel)
     plt.show()
 
 
@@ -70,6 +70,17 @@ def get_rolling_sd(values, window):
 
 def get_bollinger_bands(rm, sd):
     return rm + 2 * sd, rm - 2 * sd
+
+'''
+    return daily return
+'''
+
+def compute_daily_returns(df):
+
+    df = df.fillna(0)
+    tmp = (df / df.shift(periods=1))-1
+    tmp.ix[0, :] = 0 # fill first value to 0
+    return tmp
 
 
 '''
@@ -143,7 +154,23 @@ def test_Bollinder_Band():
     ax.legend(loc='upper left')
     plt.show()
 
+'''
+    TEST DAILY RETURN
+'''
+def test_daily_return():
+
+    # Read data
+    dates = pd.date_range('2012-07-01', '2012-07-31')  # one month only
+    symbols = ['SPY','IBM']
+    df = get_data(symbols, dates)
+    plot_data(df)
+
+    # Compute daily returns
+    daily_returns = compute_daily_returns(df)
+    plot_data(daily_returns, title="Daily returns", ylabel="Daily returns")
+
 if __name__ == "__main__":
 
     #test_run()
-    test_Bollinder_Band()
+    #test_Bollinder_Band()
+    test_daily_return()
