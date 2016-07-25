@@ -102,7 +102,7 @@ def test_run():
 
     print "\n  Standard deviation: \n", df.std()
 
-    # get stack data
+    # get stock data
     df1 = get_data(['SPY'], dates)
 
     # plot of SPY

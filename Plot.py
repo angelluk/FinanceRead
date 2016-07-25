@@ -32,7 +32,7 @@ movies = ["Annie Hall", "Ben-Hur", "Casablanca", "Gandhi", "West side story"]
 
 num_oscars = [5,11,3,8,10]
 
-xs = [i  for i, _ in enumerate(movies)] # define x shift for each movie
+xs = [i for i, _ in enumerate(movies)] # define x shift for each movie
 
 plt.bar(xs, num_oscars)
 
